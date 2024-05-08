@@ -38,22 +38,32 @@ export const POST: RequestHandler = async ({ url, params, request, locals: { sup
     const formData = await request.formData();
     console.log([...formData]);
 
+    const emailAddress = formData.get('email');
+    if (!emailAddress) {
+        return new Response(
+            JSON.stringify({ error: 'email is required' }),
+            {
+                status: 400,
+            });
+    }
+
     const { data: userProfile, error: userProfileError } = await supabase
         .from('profiles')
-        .select('id')
-        .eq('email', formData.get('email'))
+        .select('id, email')
+        .eq('email', emailAddress)
         .limit(1)
         .single();
+        console.log(userProfile)
 
     if (userProfileError) {
         return new Response(
-            userProfileError,
+            JSON.stringify(userProfileError),
             {
                 statusText: 'User Email not found in profiles',
                 status: 404,
             });
     }
-
+	
     const dbItem = {
         user_id: userProfile.id,
         dev_eui: formData.get('dev_eui'),

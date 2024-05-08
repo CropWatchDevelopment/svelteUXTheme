@@ -57,7 +57,7 @@
 				} else {
 					debugger;
 					toast.push(
-						result.statusText ??
+						result.details ??
 							'Failed to add User Permission, does the user exist and have a setup account?',
 						{
 							theme: {
