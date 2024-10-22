@@ -39,8 +39,6 @@
 		n_months_ago: 0,
 		soilType: 'Peaty',
 	});
-	console.log(result);
-	debugger;
 
 	// Function to convert EC based on selected notation type
 	const convertEC = (ecValue: number, notationType: number) => {

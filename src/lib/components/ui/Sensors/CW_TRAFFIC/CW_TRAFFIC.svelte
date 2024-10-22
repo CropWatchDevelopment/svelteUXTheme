@@ -38,9 +38,6 @@
 		view: 'dayGridMonth',
 		date: value.from,
 		events: [],
-		prev: () => {
-			debugger;
-		},
 		locale: 'ja-jp',
 	};
 

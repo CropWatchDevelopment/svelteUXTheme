@@ -24,9 +24,13 @@ export const GET: RequestHandler = async ({ params, fetch, url, locals: { supaba
         throw error(400, 'dev_eui is required');
     }
 
+
+    const start = moment(month).startOf('month').toISOString();
+    const end = moment(month).endOf('month').toISOString();
+    debugger;
     // Fetch the data for the device
     const response = await fetch(
-        `/api/v1/devices/${params.dev_eui}/data?firstDataDate=${moment(month).startOf('month').toISOString()}&lastDataDate=${moment(month).endOf('month').toISOString()}&timezone=asia/tokyo`
+        `/api/v1/devices/${params.dev_eui}/data?firstDataDate=${start}&lastDataDate=${end}&timezone=asia/tokyo`
     );
 
     if (!response.ok) {
